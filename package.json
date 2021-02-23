@@ -1,6 +1,6 @@
 {
   "name": "kontent-custom-element-app",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "license": "MIT",
   "bin": {
     "kcea": "kcea.js"
