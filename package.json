@@ -1,7 +1,19 @@
 {
   "name": "kontent-custom-element-app",
   "version": "0.3.7",
+  "keywords": [
+    "kontent",
+    "svelte",
+    "sapper",
+    "template",
+    "typescript",
+    "custom elements",
+    "headless cms",
+    "cms"
+  ],
+  "repository": "https://github.com/yuriys-kentico/KenticoKontentCustomElementApp",
   "license": "MIT",
+  "author": "Yuriy Sountsov",
   "bin": {
     "kcea": "kcea.js"
   },
