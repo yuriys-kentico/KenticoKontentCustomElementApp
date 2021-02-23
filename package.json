@@ -1,13 +1,13 @@
 {
   "name": "kontent-custom-element-app",
-  "version": "0.2.105",
+  "version": "0.3.0",
   "license": "MIT",
+  "bin": {
+    "kcea": "kcea.js"
+  },
   "scripts": {
     "install": "node install.mjs",
     "postpublish": "node postpublish.mjs"
-  },
-  "bin": {
-    "kcea": "kcea.js"
   },
   "dependencies": {
     "@babel/core": "^7.12.13",
