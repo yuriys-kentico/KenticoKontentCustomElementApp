@@ -1,0 +1,16 @@
+{
+  "name": "create-kontent-custom-element-app",
+  "version": "0.2.70",
+  "license": "MIT",
+  "bin": {
+    "create-kontent-custom-element-app": "index.js"
+  },
+  "publishConfig": {
+    "registry": "http://localhost:4873"
+  },
+  "dependencies": {
+    "chalk": "^4.1.0",
+    "commander": "^7.1.0",
+    "prompts": "^2.4.0"
+  }
+}

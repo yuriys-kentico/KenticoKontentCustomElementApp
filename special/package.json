@@ -1,0 +1,15 @@
+{
+  "name": "",
+  "version": "0.1.0",
+  "license": "MIT",
+  "scripts": {
+    "build": "kcea build",
+    "dev": "kcea dev",
+    "export": "kcea export",
+    "start": "kcea start"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "kontent-custom-element-app": "^0.2.77"
+  }
+}
