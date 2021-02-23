@@ -9,7 +9,6 @@ export const starterDirectoryName = 'starter';
 export const starterElementDirectoryName = 'customElement';
 export const elementsDirectoryName = 'src/routes/elements';
 export const samplesDirectoryName = 'samples';
-export const samplesDependeciesCommand = 'npm i --save tinycolor2&npm i --save-dev @types/tinycolor2';
 export const specialDirectoryName = 'special';
 export const newExtension = '.new';
 export const packageJsonFileName = 'package.json';
@@ -32,6 +31,5 @@ export default {
   elementsDirectoryName,
   starterDirectoryName,
   getChecksumForFileAtPath,
-  samplesDependeciesCommand,
   newExtension,
 };

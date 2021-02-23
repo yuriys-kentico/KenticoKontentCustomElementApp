@@ -20,7 +20,6 @@ const {
   elementsDirectoryName,
   starterDirectoryName,
   getChecksumForFileAtPath,
-  samplesDependeciesCommand,
   newExtension,
 } = constants;
 const { bgYellow, bold } = chalk;
@@ -46,10 +45,6 @@ const samples = process.env.kcea_samples;
 
   await installGitIgnore(checksums);
   await mergePackageJson();
-
-  if (samples === 'true' || (await samplesAlreadyInstalled())) {
-    await installSamplesDependencies();
-  }
 })();
 
 async function installTemplates(/** @type {Set<string>} */ checksums) {
@@ -117,29 +112,6 @@ async function mergePackageJson() {
 
     await jsonfile.writeFile(packageJsonPath, packageJson, { spaces: 2 });
   }
-}
-
-async function samplesAlreadyInstalled() {
-  const files = await readdir(samplesDirectoryName, { withFileTypes: true });
-
-  for (const file of files) {
-    if (file.isDirectory()) {
-      try {
-        await readdir(join(target, elementsDirectoryName, file.name));
-      } catch {
-        return false;
-      }
-    }
-  }
-
-  return true;
-}
-
-async function installSamplesDependencies() {
-  const run = exec(`cd ${target}&${samplesDependeciesCommand}`);
-
-  run.stdout.pipe(process.stdout);
-  run.stderr.pipe(process.stderr);
 }
 
 async function copyFileToPath(

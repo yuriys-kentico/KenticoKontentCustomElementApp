@@ -2,10 +2,14 @@
 'use strict';
 
 var { exec } = require('child_process');
-const packageJson = require('./package.json');
+const { readdir } = require('fs/promises');
+
+const { join } = require('path');
 const { green, red } = require('chalk');
 const prompts = require('prompts');
 const { Command } = require('commander');
+
+const packageJson = require('./package.json');
 
 const options = [
   {
@@ -140,38 +144,49 @@ function sanitizeOptions(/** @type {any[]} */ options) {
   }
 }
 
-function installApp(/** @type {any[]} */ options) {
+async function installApp(/** @type {any[]} */ options) {
+  if (options.some((option) => option.data.value === undefined)) {
+    return;
+  }
+
   const variableCommands = [];
-  let run = false;
   let name;
+  let run = false;
+  let samples = false;
 
   for (const option of options) {
     variableCommands.push(`set kcea_${option.data.name}=${option.data.value}`);
 
     switch (option.data.name) {
+      case 'name':
+        name = option.data.value;
+        break;
+
       case 'run':
         if (option.data.value == true) {
           run = true;
         }
         break;
 
-      case 'name':
-        name = option.data.value;
+      case 'samples':
+        if (option.data.value == true) {
+          samples = true;
+        }
         break;
     }
   }
 
-  if (options.some((option) => option.data.value === undefined)) {
-    return;
+  let command = `${variableCommands.join('&')}&npm i --save kontent-custom-element-app -s`;
+  let installMessage = green('Installing app, please wait...');
+
+  if (samples) {
+    command += '&npm i --save tinycolor2&npm i --save-dev @types/tinycolor2';
+    installMessage = green('Installing app and samples, please wait...');
   }
 
-  console.log(green('Installing app, please wait...'));
-
-  let command = `${variableCommands.join('&')}&npm i kontent-custom-element-app -s`;
-
+  console.log(installMessage);
   const installChild = exec(command);
 
-  // installChild.stdout.pipe(process.stdout);
   installChild.stderr.pipe(process.stderr);
 
   installChild.on('exit', (code) => {
@@ -189,3 +204,19 @@ function installApp(/** @type {any[]} */ options) {
     }
   });
 }
+
+// async function samplesAlreadyInstalled() {
+//   const files = await readdir('samples', { withFileTypes: true });
+
+//   for (const file of files) {
+//     if (file.isDirectory()) {
+//       try {
+//         await readdir('src/routes/elements', file.name);
+//       } catch {
+//         return false;
+//       }
+//     }
+//   }
+
+//   return true;
+// }
