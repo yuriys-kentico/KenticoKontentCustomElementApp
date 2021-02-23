@@ -9,7 +9,5 @@
     "start": "kcea start"
   },
   "dependencies": {},
-  "devDependencies": {
-    "kontent-custom-element-app": "^0.2.77"
-  }
+  "devDependencies": {}
 }
