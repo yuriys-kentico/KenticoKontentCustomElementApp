@@ -20,8 +20,8 @@ npm init kontent-custom-element-app
 
 ## Options
 
-| Key         | Alias |   Type    | Required | Description                                                                      |
-| ----------- | :---: | :-------: | :------: | :------------------------------------------------------------------------------- |
-| `--name`    | `-n`  | `string`  |   Yes    | Name of the app. This is also used as the name and route of the starter element. |
-| `--samples` | `-s`  | `boolean` |   Yes    | Install sample custom elements alongside the starter.                            |
-| `--run`     | `-r`  | `boolean` |   Yes    | Run app at https://localhost:3000/ immediately after installation.               |
+| Key         | Alias |   Type    | Required | Description                                                                                  |
+| ----------- | :---: | :-------: | :------: | :------------------------------------------------------------------------------------------- |
+| `--name`    | `-n`  | `string`  |   Yes    | Name of the app. This is also used as the name and route of the starter element.             |
+| `--samples` | `-s`  | `boolean` |   Yes    | Install sample custom elements alongside the starter. Use `--no-samples` to negate.          |
+| `--run`     | `-r`  | `boolean` |   Yes    | Run app at https://localhost:3000/ immediately after installation. Use `--no-run` to negate. |
