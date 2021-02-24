@@ -6,7 +6,7 @@
 [![GitHub license](https://img.shields.io/github/license/yuriys-kentico/KenticoKontentCustomElementApp?style=for-the-badge)](https://github.com/yuriys-kentico/KenticoKontentCustomElementApp/blob/main/LICENSE.md)
 ![GitHub last commit](https://img.shields.io/github/last-commit/yuriys-kentico/KenticoKontentCustomElementApp?style=for-the-badge)
 
-## A Svelte/Sapper app template for Kontent Custom elements.
+## A Svelte/Sapper app template for Kontent Custom elements
 
 This monorepository contains both the installer and the template files for `kontent-custom-element-app`.
 
