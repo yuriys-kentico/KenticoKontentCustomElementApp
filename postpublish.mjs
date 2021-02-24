@@ -1,7 +1,7 @@
 // @ts-check
 import { join } from 'path';
 import { writeFile, readdir, readFile } from 'fs/promises';
-import constants from './constants.mjs';
+import constants from './constants.js';
 import { EOL } from 'node:os';
 
 const {
@@ -20,7 +20,9 @@ const {
   await loadChecksumsForFilesInDirectoryAtPath(templateDirectoryName, checksums);
   await loadChecksumsForFilesInDirectoryAtPath(samplesDirectoryName, checksums);
 
-  const checksum = await getChecksumForFileAtPath(join(specialDirectoryName, fakeGitignoreFileName));
+  const checksum = await getChecksumForFileAtPath(
+    await readFile(join(specialDirectoryName, fakeGitignoreFileName), 'utf8')
+  );
   checksums.add(checksum);
 
   await writeFile(checksumsFileName, [...checksums].join(EOL));
@@ -34,7 +36,7 @@ async function loadChecksumsForFilesInDirectoryAtPath(
 
   for (const file of files) {
     if (file.isFile()) {
-      const checksum = await getChecksumForFileAtPath(join(directory, file.name));
+      const checksum = await getChecksumForFileAtPath(await readFile(join(directory, file.name), 'utf8'));
 
       checksums.add(checksum);
     }

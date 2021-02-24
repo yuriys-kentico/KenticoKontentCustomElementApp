@@ -1,6 +1,6 @@
 {
   "name": "kontent-custom-element-app",
-  "version": "0.3.8",
+  "version": "0.3.30",
   "keywords": [
     "kontent",
     "svelte",
@@ -18,7 +18,7 @@
     "kcea": "kcea.js"
   },
   "scripts": {
-    "install": "node install.mjs",
+    "install": "node install.js",
     "postpublish": "node postpublish.mjs"
   },
   "dependencies": {

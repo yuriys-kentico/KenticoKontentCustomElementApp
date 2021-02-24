@@ -9,3 +9,4 @@ __sapper__
 .vs
 
 .env
+.vercel

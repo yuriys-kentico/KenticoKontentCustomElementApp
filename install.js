@@ -1,12 +1,13 @@
 // @ts-check
-import { copyFile, readdir, mkdir, readFile, access, rename } from 'fs/promises';
-import { basename, join } from 'path';
-import jsonfile from 'jsonfile';
-import constants from './constants.mjs';
-import { EOL } from 'node:os';
-import { exec } from 'child_process';
-import lodash from 'lodash';
-import chalk from 'chalk';
+if (process.env.VERCEL) process.exit();
+
+const { copyFile, readdir, mkdir, readFile, access, rename } = require('fs/promises');
+const { basename, join } = require('path');
+const jsonfile = require('jsonfile');
+const constants = require('./constants.js');
+const { EOL } = require('os');
+const lodash = require('lodash');
+const chalk = require('chalk');
 
 const {
   templateDirectoryName,
@@ -131,7 +132,7 @@ async function copyFileToPath(
   }
 
   if (exists && checksums) {
-    checksumExists = checksums.has(await getChecksumForFileAtPath(targetPath));
+    checksumExists = checksums.has(await getChecksumForFileAtPath(await readFile(targetPath, 'utf8')));
   }
 
   if (!exists || (checksumExists && checksums)) {
