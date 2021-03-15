@@ -40,12 +40,12 @@ async function initI18Next(locale: string, loaded: (value: TFunction) => void) {
     lng: locale,
   });
 
+  loaded(t);
+
   if (!initFinished) {
     translateReady.next(true);
     initFinished = true;
   }
-
-  loaded(t);
 }
 
 function loadTranslations(translations: Resource | Resource[]) {
