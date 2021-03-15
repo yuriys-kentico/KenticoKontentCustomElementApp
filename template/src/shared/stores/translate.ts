@@ -1,6 +1,11 @@
 import type { Resource, TFunction } from "i18next";
 import i18next from 'i18next';
+import { BehaviorSubject } from 'rxjs';
 import { readable } from 'svelte/store';
+
+export const translateReady = new BehaviorSubject<boolean>(false);
+
+let initFinished = false;
 
 export const translate = (
   translations: Resource | Resource[],
@@ -8,9 +13,7 @@ export const translate = (
 ) =>
   readable<TFunction>(
     () => {
-      if (!i18next.isInitialized) {
-        loadI18Next(locale, () => {});
-
+      if (!initFinished) {
         return "";
       } else {
         loadTranslations(translations);
@@ -19,8 +22,8 @@ export const translate = (
       }
     },
     (set) => {
-      if (!i18next.isInitialized) {
-        loadI18Next(locale, (t) => {
+      if (!initFinished) {
+        initI18Next(locale, (t) => {
           loadTranslations(translations);
           set(t);
         });
@@ -32,12 +35,17 @@ export const translate = (
     }
   );
 
-function loadI18Next(locale: string, loaded: (value: TFunction) => void) {
-  i18next
-    .init({
-      lng: locale,
-    })
-    .then(loaded);
+async function initI18Next(locale: string, loaded: (value: TFunction) => void) {
+  const t = await i18next.init({
+    lng: locale,
+  });
+
+  if (!initFinished) {
+    translateReady.next(true);
+    initFinished = true;
+  }
+
+  loaded(t);
 }
 
 function loadTranslations(translations: Resource | Resource[]) {
