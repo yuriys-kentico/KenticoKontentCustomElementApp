@@ -1,5 +1,5 @@
 // @ts-check
-if (process.env.VERCEL) process.exit();
+if (process.env.VERCEL || process.env.HOME === '/vercel') process.exit();
 
 const { copyFile, readdir, mkdir, readFile, access, rename } = require('fs/promises');
 const { basename, join } = require('path');
